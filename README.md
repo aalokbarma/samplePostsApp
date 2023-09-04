@@ -33,3 +33,7 @@ and then start the app using the following command in root directory:
 "npm run ios"
 or
 "yarn ios"
+
+##  Run the test cases
+
+To run the test cases you only need to run the command "npm run test" or "yarn test" in root directory
