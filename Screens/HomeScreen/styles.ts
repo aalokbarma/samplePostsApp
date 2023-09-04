@@ -20,6 +20,20 @@ const Styles = StyleSheet.create({
         fontWeight: '700',
         marginVertical: 20,
     },
+    refreshButton: {
+        backgroundColor: '#1A5EDE',
+        borderRadius: 10,
+        padding: 10,
+        width: 70,
+        height: 70,
+        position: 'absolute',
+        bottom: 30,
+        right: 30,
+        zIndex: 100,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });
 
 export default Styles;

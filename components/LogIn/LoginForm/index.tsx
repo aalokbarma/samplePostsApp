@@ -1,23 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, TextInput, Pressable } from 'react-native';
+import { View, Text, Image, TextInput, Pressable, Alert } from 'react-native';
 import Styles from './styles';
 import lock from '../../../assets/sign-up/iconpng/lock.png';
-import mail from '../../../assets/sign-up/iconpng/email.png';
+import phone from '../../../assets/sign-up/iconpng/phone.png';
 import show from '../../../assets/sign-up/iconpng/Group.png';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import axios from 'axios';
-
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 
 const reviewSchema = yup.object({
-    Email: yup.string()
+    Username:  yup.string()
         .required()
-        .test('is contain @', "Please provide a valid E mail", (val) => {
-            return val?.includes('@');
-        }),
+        .min(3),
     Password: yup.string()
         .required()
         .min(8)
@@ -26,10 +21,14 @@ const reviewSchema = yup.object({
     // })
 });
 
-const LoginForm = ({ navigation}: any) => {
+interface loginFormTypes{
+    navigation: {
+        navigate: Function,
+        push: Function
+    }
+}
 
-    const [email, setEmail] = useState('');
-    const [pass, setPass] = useState('');
+const LoginForm = ({ navigation}: any) => {
     const [securePass, setSecurePass] = useState(true);
 
     const onForgetPress = () => {
@@ -45,55 +44,47 @@ const LoginForm = ({ navigation}: any) => {
     };
 
     const onSubmit = async (value: any, actions: any) => {
-        const url = "http://www.teamsprouts.com/api/v1/login";
+        // console.warn("Value => " + JSON.stringify(value));
 
-        axios.post(url, value)
-            .then((res) => {
-                const jsonValue = JSON.stringify(res.data.data);
-                AsyncStorage.setItem("@access_token", jsonValue);
-                getToken();
-            })
-            .catch(err => console.log(err.message))
-
-            
-    }
-        const getToken = async () => {
-            try{
-                const jsonValue = await AsyncStorage.getItem('@access_token')
-                const mainToken = jsonValue != null ? JSON.parse(jsonValue) : null
-                navigation.navigate("ChatList");
-            }
-            catch(e) {
-              }
+        if(value.Username == "Together" && value.Password == "Test@123"){
+            Alert.alert('Success', 'Login Successful', [
+                {
+                  text: 'OK',
+                  onPress: () => navigation.push('Home'),
+                  style: 'cancel',
+                },
+                
+              ]);
+            value.Username = "";
+            value.Password = "";
         }
+        else {
+            Alert.alert('Login Failed', 'Kindly check your Username and Password');
+        }
+    }
 
     return (
         <View style={Styles.form}>
             <Text style={Styles.formHeader}>Login</Text>
             <Formik
-                initialValues={{ Email: '', Password: '' }}
+                initialValues={{Username: '', Password: '' }}
                 validationSchema={reviewSchema}
                 onSubmit={onSubmit}
             >
                 {(props) => (
                     <View>
-                        <View style={Styles.inputRow}>
-
-                            <Image
-                                style={Styles.mailImage}
-                                source={mail}
-                            />
-                            <TextInput
-                                style={Styles.phoneInput}
-                                placeholder='Email ID'
+                        <View style = {Styles.inputRow}>
+                        <FontAwesome name="user-o" size={24} color="#555" />
+                            <TextInput 
+                                style = {Styles.phoneInput}
+                                placeholder='Username'
                                 placeholderTextColor={"#323948"}
-                                value={props.values.Email}
-                                onChangeText={props.handleChange('Email')}
-                                onBlur={props.handleBlur('Email')}
-                                textContentType='emailAddress'
+                                value= {props.values.Username}
+                                onChangeText = {props.handleChange('Username')}
+                                onBlur={props.handleBlur('Username')}
                             />
                         </View>
-                        <Text style={Styles.errorMessage}> {props.touched.Email && props.errors.Email} </Text>
+                        <Text style = {Styles.errorMessage}> { props.touched.Username && props.errors.Username} </Text>
                         <View style={Styles.inputRow}>
                             <Image
                                 style={Styles.lockImage}
@@ -119,13 +110,8 @@ const LoginForm = ({ navigation}: any) => {
                             </View>
                         </View>
                         <Text style={Styles.errorMessage}> {props.touched.Password && props.errors.Password} </Text>
-                        <View style={Styles.forgetPassContainer}>
-                            <Pressable onPress={onForgetPress}>
-                                <Text style={Styles.forgetPassText}>Forget password ?</Text>
-                            </Pressable>
-                        </View>
                         <View style={Styles.signUpButtonContainer}>
-                            <Pressable style={Styles.signUpButton} onPress={() => props.handleSubmit} >
+                            <Pressable style={Styles.signUpButton} onPress={() => props.handleSubmit()} >
                                 <Text style={Styles.signUpText}>Login</Text>
                             </Pressable>
                         </View>
