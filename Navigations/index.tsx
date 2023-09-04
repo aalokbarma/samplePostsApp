@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 const Navigations = () => {
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName='Signup'>
+        <Stack.Navigator initialRouteName='Home'>
         <Stack.Group screenOptions={{headerShown: false}}>
             <Stack.Screen name="Signup" component={SignupScreen} />
             <Stack.Screen name="Login" component={LoginScreen} />

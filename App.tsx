@@ -44,7 +44,10 @@ function App(): JSX.Element {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#fff',
+    width: '100%',
+    height: '100%',
   }
 });
 
