@@ -7,8 +7,6 @@ import axios from 'axios';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Foundation from 'react-native-vector-icons/Foundation';
 
-const ITEMS_PER_PAGE = 20;
-
 const HomeScreen = ({navigation}: any) => {
 
   const [postsData, setPostsData]= useState([]);
