@@ -1,3 +1,0 @@
-Colour #1A5EDE
-Font : Inter Google font
-

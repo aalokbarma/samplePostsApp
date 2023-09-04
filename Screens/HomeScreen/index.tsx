@@ -1,4 +1,4 @@
-import { View, Text, ActivityIndicator, FlatList, RefreshControl, TouchableOpacity} from 'react-native';
+import { View, Text, ActivityIndicator, FlatList, RefreshControl, TouchableOpacity, Alert} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Styles from './styles';
 import Header from '../../components/SignUp/Header';
@@ -19,7 +19,7 @@ const HomeScreen = ({navigation}: any) => {
       setPostsData(response.data);
       setDataFetching(false);
     } catch (error) {
-      console.error(error);
+      Alert.alert("Error!", "Data can not be fetched.")
       setDataFetching(false);
     }
   }
@@ -28,7 +28,7 @@ const HomeScreen = ({navigation}: any) => {
     fetchData();
   }, [])
   return (
-    <View style = {Styles.homeScreen}>
+    <View style = {Styles.homeScreen} testID='HomeScreenContainer'>
       <Header />
       {
         dataFetching ? <ActivityIndicator /> : 
@@ -53,7 +53,7 @@ const HomeScreen = ({navigation}: any) => {
               <Text style = {Styles.noDataText}>Nothing to show.</Text>
             </View>
         }
-        <TouchableOpacity style = {Styles.refreshButton} onPress={() => fetchData()}>
+        <TouchableOpacity testID='HomeScreenRefreshButton' style = {Styles.refreshButton} onPress={() => fetchData()}>
           <Foundation name="refresh" size={40} color="#fbfbfb" />
         </TouchableOpacity>
         </>

@@ -1,7 +1,6 @@
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 import Styles from './styles';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface itemPropTypes{
     item:{

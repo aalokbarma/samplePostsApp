@@ -1,16 +1,15 @@
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 import Styles from './styles';
 import Header from '../../components/SignUp/Header';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 const PostScreen = ({navigation, route}: any) => {
   const {postData} = route.params
   return (
-    <View style = {Styles.postScreenContainer}>
+    <View style = {Styles.postScreenContainer} testID='PostScreenContainer'>
       <View style = {Styles.postHeader}>
-        <TouchableOpacity style = {Styles.backButtonContainer} onPress={() => navigation.goBack()}>
+        <TouchableOpacity testID='PostScreenBackButton' style = {Styles.backButtonContainer} onPress={() => navigation.goBack()}>
           <Entypo name="chevron-left" size={50} color="#fbfbfb" />
         </TouchableOpacity>
         <Text style = {Styles.postHeaderText}>Post</Text>

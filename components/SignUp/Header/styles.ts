@@ -12,15 +12,11 @@ const Styles = StyleSheet.create({
         paddingLeft: 25,
     },
     logoImage: {
-        width: 80,
         height: 80,
         marginRight: 20,
+        width: '100%',
+        resizeMode: 'contain',
     },
-    mainText: {
-        color: "#fff",
-        fontWeight: 'bold',
-        fontSize: 25,
-    }
 
 });
 export default Styles;

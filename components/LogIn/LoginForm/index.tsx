@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, TextInput, Pressable, Alert } from 'react-native';
 import Styles from './styles';
 import lock from '../../../assets/sign-up/iconpng/lock.png';
-import phone from '../../../assets/sign-up/iconpng/phone.png';
 import show from '../../../assets/sign-up/iconpng/Group.png';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
@@ -31,10 +30,6 @@ interface loginFormTypes{
 const LoginForm = ({ navigation}: any) => {
     const [securePass, setSecurePass] = useState(true);
 
-    const onForgetPress = () => {
-        navigation.navigate('ForgetPassword');
-    };
-
     const onLockPress = () => {
         if (securePass == true) {
             setSecurePass(false)
@@ -44,8 +39,6 @@ const LoginForm = ({ navigation}: any) => {
     };
 
     const onSubmit = async (value: any, actions: any) => {
-        // console.warn("Value => " + JSON.stringify(value));
-
         if(value.Username == "Together" && value.Password == "Test@123"){
             Alert.alert('Success', 'Login Successful', [
                 {
@@ -64,7 +57,7 @@ const LoginForm = ({ navigation}: any) => {
     }
 
     return (
-        <View style={Styles.form}>
+        <View style={Styles.form} testID="LoginFormContainer">
             <Text style={Styles.formHeader}>Login</Text>
             <Formik
                 initialValues={{Username: '', Password: '' }}
