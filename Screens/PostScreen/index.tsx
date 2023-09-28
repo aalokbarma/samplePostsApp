@@ -1,11 +1,15 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 import Styles from './styles';
-import Header from '../../components/SignUp/Header';
 import Entypo from 'react-native-vector-icons/Entypo';
+import {useSelector} from 'react-redux';
 
-const PostScreen = ({navigation, route}: any) => {
-  const {postData} = route.params
+const PostScreen = ({navigation}: any) => {
+  
+  // here we are getting the posts data from the store
+  const postReduxData = useSelector((state: any) => state.reducer)
+  const postData = postReduxData[0]
+  
   return (
     <View style = {Styles.postScreenContainer} testID='PostScreenContainer'>
       <View style = {Styles.postHeader}>
@@ -17,11 +21,11 @@ const PostScreen = ({navigation, route}: any) => {
       <View style = {Styles.postContainer}>
         <View style = {Styles.contentContainer}>
           <Text style = {Styles.postHeading}>
-            {postData.title}
+            {postData[0]?.title}
           </Text>
           <View style = {Styles.separator} />
           <Text style = {Styles.postBody}>
-            {postData.body}
+            {postData[0]?.body}
           </Text>
         </View>
       </View>
