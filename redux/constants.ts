@@ -2,3 +2,4 @@
 export const UPDATE_POST = "update_post";
 export const POSTS_LIST = 'posts_list';
 export const SET_POSTS_DATA = 'set_posts_data';
+export const ERROR = 'error'

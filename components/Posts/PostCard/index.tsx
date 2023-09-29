@@ -29,7 +29,7 @@ const PostCard = ({item, navigation}: itemPropTypes) => {
   }
 
   return (
-    <View style = {Styles.postCardContainer}>
+    <View style = {Styles.postCardContainer} testID='PostCard'>
       <TouchableOpacity style = {Styles.postCard} onPress={() => handleUpdatePost()}>
         <Text style = {Styles.postTitle} numberOfLines={1}>{item.item.title}</Text>
         <Text style = {Styles.postBody} numberOfLines={2}>{item.item.body}</Text>

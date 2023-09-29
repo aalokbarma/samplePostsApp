@@ -1,6 +1,8 @@
 import * as React from 'react';
 import PostScreen from ".";
 import {render, fireEvent} from '@testing-library/react-native';
+import { Provider, useDispatch, useSelector } from 'react-redux';
+import configureStore from 'redux-mock-store';
 
 const screenProps = {
     navigation: {
@@ -24,6 +26,23 @@ jest.mock(
     'react-native-vector-icons/Entypo',
     () => 'MockedEntypo',
   );
+
+  const itemProps = {
+    reducer: {
+        title: "abd",
+        body: "asn",
+    }
+  }
+
+  jest.mock('react-redux', () => ({
+    useSelector: ((itemProps) => {
+        return[
+            [itemProps]
+        ]
+    }),
+    useDispatch: jest.fn()
+  }));
+  
 
 
   describe('renderPostsScreen' , () => {
